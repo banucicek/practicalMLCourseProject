@@ -4,6 +4,10 @@ author: "Banuçiçek Gürcüoglu"
 output: html_document
 job: Practical Machine Learning Course of John Hopkins University's Coursera Data Science Specialization
 ---
+For building the model, we are going to use random forest algorithm from the caret package. To establish the quality of the data that is fed into the model, we will make sure that the null values like "NA", "","#DIV/0!" is handled (while loading the data) so that numeric columns are not treated as factors and remove the columns that contain mostly null values.
+
+For validating the model, we will set 30% of the data aside and traing the model on the rest of it. Since we know the labels for the validation set, we will compare them to our predictions and get the out of sample error.
+
 
 Load the libraries and human activity data:
 ```{r loaddata, eval=TRUE}
@@ -66,7 +70,7 @@ validationPrediction <- predict(mod1,newdata=validating)
 confusionMatrix(validating$classe, validationPrediction)
 
 ```
-
+Accuracy on the validation test is 0.9932, therefor the out of the sample set error is 0.0068.
 
 Prediction on test data:
 ```{r testPrediction, eval=TRUE}

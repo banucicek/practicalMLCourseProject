@@ -121,6 +121,8 @@ $(document).ready(function () {
 </div>
 
 
+<p>For building the model, we are going to use random forest algorithm from the caret package. To establish the quality of the data that is fed into the model, we will make sure that the null values like “NA”, “”,“#DIV/0!” is handled (while loading the data) so that numeric columns are not treated as factors and remove the columns that contain mostly null values.</p>
+<p>For validating the model, we will set 30% of the data aside and traing the model on the rest of it. Since we know the labels for the validation set, we will compare them to our predictions and get the out of sample error.</p>
 <p>Load the libraries and human activity data:</p>
 <pre class="r"><code>library(caret)</code></pre>
 <pre><code>## Warning: package 'caret' was built under R version 3.3.2</code></pre>
@@ -199,6 +201,7 @@ confusionMatrix(validating$classe, validationPrediction)</code></pre>
 ## Detection Rate         0.2843   0.1924   0.1725   0.1604   0.1837
 ## Detection Prevalence   0.2845   0.1935   0.1743   0.1638   0.1839
 ## Balanced Accuracy      0.9978   0.9949   0.9892   0.9964   0.9999</code></pre>
+<p>Accuracy on the validation test is 0.9932, therefor the out of the sample set error is 0.0068.</p>
 <p>Prediction on test data:</p>
 <pre class="r"><code>testPrediction &lt;- predict(mod1,newdata=testing)
 testPrediction</code></pre>
